@@ -9,4 +9,4 @@ Welcome to my **AoC 2024** repository! This is where I'll be solving and sharing
 
 ## 📜 License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](LICENSE.md).
