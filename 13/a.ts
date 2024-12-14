@@ -58,21 +58,18 @@ function solve(machine: Machine): { a: number; b: number } | undefined {
     b2 = machine.buttonB.y,
     targetY = machine.price.y;
 
-  // Determinant of the coefficient matrix
-  const determinant = a1 * b2 - a2 * b1;
+  const det = a1 * b2 - a2 * b1;
 
-  if (determinant === 0) {
+  if (det === 0) {
     return undefined;
   }
 
-  // Using Cramer's Rule
   const determinantA = targetX * b2 - targetY * b1;
   const determinantB = a1 * targetY - a2 * targetX;
 
-  const nA = determinantA / determinant;
-  const nB = determinantB / determinant;
+  const nA = determinantA / det;
+  const nB = determinantB / det;
 
-  // Check if the solutions are integers and non-negative
   if (Number.isInteger(nA) && Number.isInteger(nB) && nA >= 0 && nB >= 0) {
     return { a: nA, b: nB };
   } else {

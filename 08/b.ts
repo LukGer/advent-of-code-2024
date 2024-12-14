@@ -1,3 +1,5 @@
+import type { XY } from "../helper/types";
+
 const file = Bun.file("input.txt");
 
 const text = await file.text();
@@ -6,12 +8,7 @@ const lines = text.split("\n");
 const rows = lines.length;
 const cols = lines[0].length;
 
-type Coordinate = {
-  x: number;
-  y: number;
-};
-
-const antennas = new Map<string, Coordinate[]>();
+const antennas = new Map<string, XY[]>();
 
 for (let y = 0; y < rows; y++) {
   for (let x = 0; x < cols; x++) {
@@ -25,7 +22,7 @@ for (let y = 0; y < rows; y++) {
   }
 }
 
-const antinodes: Coordinate[] = [];
+const antinodes: XY[] = [];
 
 for (const [_, coords] of antennas) {
   for (let i = 0; i < coords.length; i++) {
