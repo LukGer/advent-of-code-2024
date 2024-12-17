@@ -78,18 +78,18 @@ function move(
         return false;
       }
     } else if (direction === ">") {
-      const box = warehouse.boxes.find((b) => b.x === x + 1 && b.y === y);
+      const box = warehouse.boxes.find((b) => b.x === x && b.y === y);
 
       if (box && !move(warehouse, box, true, direction)) {
         return false;
-      } else {
-        const box = warehouse.boxes.find(
-          (b) => (b.x === x || b.x === x - 1) && b.y === y
-        );
+      }
+    } else {
+      const box = warehouse.boxes.find(
+        (b) => (b.x === x || b.x === x - 1) && b.y === y
+      );
 
-        if (box && !move(warehouse, box, true, direction)) {
-          return false;
-        }
+      if (box && !move(warehouse, box, true, direction)) {
+        return false;
       }
     }
   } else {
@@ -104,33 +104,33 @@ function move(
 
       if (otherBox && !move(warehouse, otherBox, true, direction)) {
         return false;
-      } else {
-        const leftSideBox = warehouse.boxes.find(
-          (b) => b.x === x - 1 && b.y === y
-        );
+      }
+    } else {
+      const leftSideBox = warehouse.boxes.find(
+        (b) => b.x === x - 1 && b.y === y
+      );
 
-        if (leftSideBox) {
-          if (!move(warehouse, leftSideBox, true, direction)) {
-            return false;
-          }
+      if (leftSideBox) {
+        if (!move(warehouse, leftSideBox, true, direction)) {
+          return false;
         }
+      }
 
-        const middleBox = warehouse.boxes.find((b) => b.x === x && b.y === y);
+      const middleBox = warehouse.boxes.find((b) => b.x === x && b.y === y);
 
-        if (middleBox) {
-          if (!move(warehouse, middleBox, true, direction)) {
-            return false;
-          }
+      if (middleBox) {
+        if (!move(warehouse, middleBox, true, direction)) {
+          return false;
         }
+      }
 
-        const rightSideBox = warehouse.boxes.find(
-          (b) => b.x === x + 1 && b.y === y
-        );
+      const rightSideBox = warehouse.boxes.find(
+        (b) => b.x === x + 1 && b.y === y
+      );
 
-        if (rightSideBox) {
-          if (!move(warehouse, rightSideBox, true, direction)) {
-            return false;
-          }
+      if (rightSideBox) {
+        if (!move(warehouse, rightSideBox, true, direction)) {
+          return false;
         }
       }
     }
