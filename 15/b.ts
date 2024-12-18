@@ -71,67 +71,38 @@ function move(
   }
 
   if (!isBox) {
-    if (direction === "<") {
-      const box = warehouse.boxes.find((b) => b.x === x - 1 && b.y === y);
-
-      if (box && !move(warehouse, box, true, direction)) {
-        return false;
-      }
-    } else if (direction === ">") {
-      const box = warehouse.boxes.find((b) => b.x === x && b.y === y);
-
-      if (box && !move(warehouse, box, true, direction)) {
-        return false;
-      }
-    } else {
-      const box = warehouse.boxes.find(
-        (b) => (b.x === x || b.x === x - 1) && b.y === y
-      );
-
-      if (box && !move(warehouse, box, true, direction)) {
+    const boxAtDest = warehouse.boxes.find(
+      (b) => (b.x === x || b.x === x - 1) && b.y === y
+    );
+    if (boxAtDest) {
+      if (!move(warehouse, boxAtDest, true, direction)) {
         return false;
       }
     }
   } else {
-    if (direction === "<") {
-      const otherBox = warehouse.boxes.find((b) => b.x === x - 1 && b.y === y);
+    const leftSideBox = warehouse.boxes.find((b) => b.x === x - 1 && b.y === y);
 
-      if (otherBox && !move(warehouse, otherBox, true, direction)) {
+    if (leftSideBox && leftSideBox.x !== object.x) {
+      if (!move(warehouse, leftSideBox, true, direction)) {
         return false;
       }
-    } else if (direction === ">") {
-      const otherBox = warehouse.boxes.find((b) => b.x === x + 1 && b.y === y);
+    }
 
-      if (otherBox && !move(warehouse, otherBox, true, direction)) {
+    const middleBox = warehouse.boxes.find((b) => b.x === x && b.y === y);
+
+    if (middleBox && middleBox.x !== object.x) {
+      if (!move(warehouse, middleBox, true, direction)) {
         return false;
       }
-    } else {
-      const leftSideBox = warehouse.boxes.find(
-        (b) => b.x === x - 1 && b.y === y
-      );
+    }
 
-      if (leftSideBox) {
-        if (!move(warehouse, leftSideBox, true, direction)) {
-          return false;
-        }
-      }
+    const rightSideBox = warehouse.boxes.find(
+      (b) => b.x === x + 1 && b.y === y
+    );
 
-      const middleBox = warehouse.boxes.find((b) => b.x === x && b.y === y);
-
-      if (middleBox) {
-        if (!move(warehouse, middleBox, true, direction)) {
-          return false;
-        }
-      }
-
-      const rightSideBox = warehouse.boxes.find(
-        (b) => b.x === x + 1 && b.y === y
-      );
-
-      if (rightSideBox) {
-        if (!move(warehouse, rightSideBox, true, direction)) {
-          return false;
-        }
+    if (rightSideBox && rightSideBox.x !== object.x) {
+      if (!move(warehouse, rightSideBox, true, direction)) {
+        return false;
       }
     }
   }
